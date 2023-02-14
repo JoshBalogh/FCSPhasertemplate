@@ -5,15 +5,15 @@ import { GameOver } from './scenes/GameOver.js';
 let config = {
     type: Phaser.AUTO,
     parent: 'phaser-example',
-    width: 800,
-    height: 600,
+    width: 1600,
+    height: 1000,
     input: {
         gamepad: true
     },
     physics: {
         default: "arcade",
         arcade: {
-            debug: false,
+            debug: true,
             fps: 60,
             gravity: { y: 0 }
         }

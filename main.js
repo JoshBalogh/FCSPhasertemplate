@@ -13,7 +13,7 @@ let config = {
     physics: {
         default: "arcade",
         arcade: {
-            debug: true,
+            debug: false,
             fps: 60,
             gravity: { y: 0 }
         }

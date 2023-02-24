@@ -11,6 +11,7 @@ constructor(scene, x, y, type) {
     this.setScale(0.5)
     this.timeAlive = 0
     this.type = type
+    this.alive = true
     if(this.type === 'darkSlime'){
         this.fillColor = 0xff0000
         this.speed = 1/10000
@@ -18,7 +19,7 @@ constructor(scene, x, y, type) {
     }
     if(this.type === 'regSlime'){
         this.fillColor = 0x0000ff
-        this.speed = 1/1000 //in millisecond | 1000millisecond = 1 second
+        this.speed = 1/5000 //in millisecond | 1000millisecond = 1 second
     }
     
 
@@ -30,6 +31,9 @@ constructor(scene, x, y, type) {
     this.timeAlive += d  * this.speed
     if(this.timeAlive > 1){
         this.timeAlive = 1
+    }
+    if(this.alive === false){
+        this.destroy()
     }
  
 

@@ -30,3 +30,23 @@ for final project of the tower game
 
 finish towers with bullets and AOE
 
+\\\\\\\\ NEEDS BEFORE 2/24
+
+add bullets for towers (bullets work need to put it in tower | rn i have the bullets 
+set at the archer.x and y, and it's spawning the bullets at 0)
+
+add 2 towers using same tower class(need the AOE tower)
+
+    -add a timer so the castle's bullets (arrows) get faster 
+        -then add AOE attacks (a magic attack)
+            -add a shaded area for AOE (ITS BONUS POINTS) | how to do dis??
+
+
+get enemies(slimes) to do damage to castle 
+add a health bar for castle and maybe slimes 
+add timer for red slime so they keep on coming 
+add the arrows for caslte which speed will increase due from time
+
+**deleting no working need help me dumb
+
+

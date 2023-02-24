@@ -1,5 +1,6 @@
-import {Castle} from '../objects/Castle.js';
-import {Enemy} from '../objects/Enemy.js'
+import { Archer } from '../objects/Archer.js';
+import { Castle } from '../objects/Castle.js';
+import { Enemy } from '../objects/Enemy.js'
 
 export class MainLevel extends Phaser.Scene {
   constructor() {
@@ -28,13 +29,18 @@ export class MainLevel extends Phaser.Scene {
     this.path.lineTo(1100, 500)
     this.path.lineTo(1400, 500)
 
+    this.castle = new Castle(this)
+
     const e = new Enemy(this, 100, 100, 'darkSlime')
 
-    this.castle = new Castle(this)
-    
+    new Archer(this, 1500, 100, e)
+    new Archer(this, 1500, 500, e)
+    new Archer(this, 1500, 900, e)
+
     e.setEnemyPath(this.path)
     this.enemies.push(e)
     this.createColliders();
+    this.deadSlimes();
   }
   update(timestamp, delta) {
     // this runs every frame
@@ -51,13 +57,22 @@ export class MainLevel extends Phaser.Scene {
   }
 
   
-   createColliders() {
+  createColliders() {
     this.physics.add.overlap(
       this.enemies, 
       this.castle, 
-      () => {
-        console.log('y it no wrke')
-      }
-    )//dont know if its working
-   }
+    )
+
+    this.physics.add.collider(
+      this.enemies,
+      this.projectiles,
+      this.deadSlimes(),
+      null,
+      this
+    )
+  }
+  deadSlimes() {
+    this.alive = false
+  }
+  
 }

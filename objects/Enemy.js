@@ -12,6 +12,7 @@ constructor(scene, x, y, type) {
     this.timeAlive = 0
     this.type = type
     this.alive = true
+    
     if(this.type === 'darkSlime'){
         this.fillColor = 0xff0000
         this.speed = 1/10000
@@ -32,7 +33,7 @@ constructor(scene, x, y, type) {
     if(this.timeAlive > 1){
         this.timeAlive = 1
     }
-    if(this.alive === false){
+    if(!this.alive){
         this.destroy()
     }
  

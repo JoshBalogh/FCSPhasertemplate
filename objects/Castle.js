@@ -6,6 +6,15 @@ export class Castle extends Phaser.GameObjects.Rectangle{
         this.scene.physics.add.existing(this)
         this.body.collideWorldBounds = true
         this.timeAlive = 0
+        this.hp = 100
     }
-    preUpdate(){}
+    preUpdate(){
+      this.bghprect  = new Phaser.GameObjects.Rectangle(this, 500, 500, 100, 50, 0xff0000)
+      //this.hprect = new Phaser.GameObjects.Rectangle(this, 500, 500, 100, 50, 0x00ff00)
+
+    
+    }
+    castleHpBar(){
+
+    }
 }

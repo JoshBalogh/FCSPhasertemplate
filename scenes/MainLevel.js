@@ -6,7 +6,9 @@ export class MainLevel extends Phaser.Scene {
   constructor() {
     super({ key: "main-level" });
     this.enemies = []
-    this.nextEnemy = 5000
+    this.nextEnemy = 70
+    this.nextBigEnemy = 75
+    this.projectiles = []
   } 
  
 
@@ -40,7 +42,6 @@ export class MainLevel extends Phaser.Scene {
     e.setEnemyPath(this.path)
     this.enemies.push(e)
     this.createColliders();
-    this.deadSlimes();
   }
   update(timestamp, delta) {
     // this runs every frame
@@ -52,7 +53,14 @@ export class MainLevel extends Phaser.Scene {
       const e = new Enemy(this, 100, 100, 'regSlime')
       e.setEnemyPath(this.path)
       this.enemies.push(e)
-      this.nextEnemy = 5000
+      this.nextEnemy = 250
+    }
+    this.nextBigEnemy -= delta
+    if(this.nextBigEnemy <= 0){
+      const e = new Enemy(this, 100, 100, 'darkSlime')
+      e.setEnemyPath(this.path)
+      this.enemies.push(e)
+      this.nextBigEnemy = 500
     }
   }
 
@@ -60,19 +68,25 @@ export class MainLevel extends Phaser.Scene {
   createColliders() {
     this.physics.add.overlap(
       this.enemies, 
-      this.castle, 
+      this.castle,
+      this.castleHealth
+      /*need to add a method where when enemies hit castle it takes damage |
+      castle needs health bar | enemy needs health bar so indicate when enemy aka player loses
+      */
     )
 
     this.physics.add.collider(
       this.enemies,
       this.projectiles,
-      this.deadSlimes(),
-      null,
-      this
+      this.deadSlimes
     )
   }
-  deadSlimes() {
-    this.alive = false
+  deadSlimes(e, p) {
+    e.alive = false
+    p.alive = false
+  }
+  castleHealth(){
+    this.hp - 5
   }
   
 }

@@ -8,6 +8,7 @@ export class MainLevel extends Phaser.Scene {
     this.enemies = []
     this.nextEnemy = 70
     this.nextBigEnemy = 75
+    this.enemyDelay = 1000
     this.projectiles = []
   } 
  
@@ -38,6 +39,9 @@ export class MainLevel extends Phaser.Scene {
     new Archer(this, 1500, 100, e)
     new Archer(this, 1500, 500, e)
     new Archer(this, 1500, 900, e)
+    //new Archer(this, 1300, 500)
+
+    
 
     e.setEnemyPath(this.path)
     this.enemies.push(e)
@@ -47,20 +51,27 @@ export class MainLevel extends Phaser.Scene {
     // this runs every frame
     // delta can be used to determine the number of milliseconds since the last update
 
-//use delta to set a timer so the enemy is set on the path every few seconds | create variable (nextEnemy) first time is set to 0 then decrament it so when set to zero it will reset 
     this.nextEnemy -= delta;
     if(this.nextEnemy <= 0){
       const e = new Enemy(this, 100, 100, 'regSlime')
       e.setEnemyPath(this.path)
       this.enemies.push(e)
-      this.nextEnemy = 250
+      this.nextEnemy = this.enemyDelay
+      this.enemyDelay *= .99
     }
     this.nextBigEnemy -= delta
     if(this.nextBigEnemy <= 0){
       const e = new Enemy(this, 100, 100, 'darkSlime')
       e.setEnemyPath(this.path)
       this.enemies.push(e)
-      this.nextBigEnemy = 500
+      this.nextBigEnemy = this.enemyDelay
+      this.enemyDelay *= .99
+    }
+
+    if(this.castle.hp <= 0){
+      this.scene.pause()
+      this.castle.hprect.width = 0
+      this.add.text(700, 700, ' GAME OVER')
     }
   }
 
@@ -69,24 +80,30 @@ export class MainLevel extends Phaser.Scene {
     this.physics.add.overlap(
       this.enemies, 
       this.castle,
-      this.castleHealth
-      /*need to add a method where when enemies hit castle it takes damage |
-      castle needs health bar | enemy needs health bar so indicate when enemy aka player loses
-      */
+      this.castleHealth,
+      null,
+      this
     )
 
     this.physics.add.collider(
       this.enemies,
       this.projectiles,
-      this.deadSlimes
+      this.deadSlimes,
+      null, 
+      this
     )
   }
   deadSlimes(e, p) {
     e.alive = false
     p.alive = false
+    
   }
-  castleHealth(){
-    this.hp - 5
+  castleHealth(e, c){
+    if(e.alive){
+      this.castle.hp -= 5
+    }
+    e.alive = false
   }
+
   
 }

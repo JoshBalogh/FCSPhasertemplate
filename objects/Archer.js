@@ -7,7 +7,7 @@ constructor(scene, x, y, target){
     this.scene.physics.add.existing(this)
     this.body.collideWorldBounds = true
     this.target = target
-    this.nextProjectile = 500
+    this.nextProjectile = Math.random()*500+500
 
 
 }
@@ -22,7 +22,7 @@ constructor(scene, x, y, target){
         if(this.nextProjectile <= 0 && this.target?.alive){
             const p = new Projectile(this.scene, this.target, this.x, this.y)
             this.scene.projectiles.push(p)
-            this.nextProjectile = 500
+            this.nextProjectile = Math.random()*1000+500
         }
         
     }

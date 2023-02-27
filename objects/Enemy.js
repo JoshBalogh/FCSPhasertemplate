@@ -22,6 +22,8 @@ constructor(scene, x, y, type) {
         this.fillColor = 0x0000ff
         this.speed = 1/5000 //in millisecond | 1000millisecond = 1 second
     }
+
+
     
 
  }
@@ -36,6 +38,7 @@ constructor(scene, x, y, type) {
     if(!this.alive){
         this.destroy()
     }
+
  
 
 

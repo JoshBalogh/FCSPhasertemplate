@@ -39,7 +39,7 @@ export class MainLevel extends Phaser.Scene {
     new Archer(this, 1500, 100, e)
     new Archer(this, 1500, 500, e)
     new Archer(this, 1500, 900, e)
-    //new Archer(this, 1300, 500)
+
 
     
 

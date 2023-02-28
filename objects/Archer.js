@@ -12,7 +12,6 @@ constructor(scene, x, y, target){
 
 }
     preUpdate(timestamp, delta){
-        //add a timer for the projectile to shoot slimes(enemy) don't know if this will work need to add the x and y for projectile don't know how i'd don this ***
         if(this.target && !this.target.alive){ //!this.target?.alive - these are the same
             this.target = undefined 
         }else{
